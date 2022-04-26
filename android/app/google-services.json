@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "565959289300",
+    "project_id": "expensenote-e8c54",
+    "storage_bucket": "expensenote-e8c54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565959289300:android:755be9e9d69dc79f06ce41",
+        "android_client_info": {
+          "package_name": "com.example.expensenote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565959289300-aac9s3ksse2dkf9gd7i61kupmlhp9emt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.expensenote",
+            "certificate_hash": "549d0ba9db059555d92944c586f8459213c0294a"
+          }
+        },
+        {
+          "client_id": "565959289300-u2u6o7v25hv394mfilqg434anqiuqop1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_0SQIBj0k7SfteQqEQY_w1hpm2J5k9_Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565959289300-u2u6o7v25hv394mfilqg434anqiuqop1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
