@@ -21,12 +21,7 @@ class _HiveTutotialState extends State<HiveTutotial> {
       appBar: AppBar(
         title: Text(data0),
       ),
-      body: Column(
-        children: [
-          Text(data1),
-          Text(data0,style: TextStyle(fontSize: 20)),
-        ],
-      ),
+      body: Text(data1),
       bottomNavigationBar: BottomBar(3).BottomBarWidget(),
     );
   }
