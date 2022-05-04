@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../constants/bottomnavigationbar.dart';
 import 'myhomepage.dart';
 
 class DebitPage extends StatefulWidget {
@@ -34,8 +33,8 @@ class _DebitPageState extends State<DebitPage> {
               width: 300,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  border: Border.all(width: 4, color: Colors.green),
+                  color: Colors.red[300],
+                  // color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10)),
               child: TextFormField(
                 validator: (value) {
@@ -72,9 +71,6 @@ class _DebitPageState extends State<DebitPage> {
                 style: ButtonStyle(),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
                     FocusManager.instance.primaryFocus?.unfocus();
                     var firebaseUser = FirebaseAuth.instance.currentUser;
                     firestore
@@ -87,7 +83,7 @@ class _DebitPageState extends State<DebitPage> {
                       "description": description,
                       "date": dateandtime,
                     }).then((_) {
-                      Get.off(const MyHomePage());
+                      Get.off(() => const Home());
                     });
                   }
                 },
@@ -95,7 +91,6 @@ class _DebitPageState extends State<DebitPage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(0).BottomBarWidget(),
     );
   }
 }

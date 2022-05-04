@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expensenote/Pages/myhomepage.dart';
+import 'package:expensenote/main.dart';
+import 'package:expensenote/models/hivetransactionmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../constants/bottomnavigationbar.dart';
 
 class CreditPage extends StatefulWidget {
   const CreditPage({Key? key}) : super(key: key);
@@ -35,8 +35,8 @@ class _CreditPageState extends State<CreditPage> {
               width: 300,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  border: Border.all(width: 4, color: Colors.green),
+                  color: Colors.green[300],
+                  // color: Colors.grey[300],
                   borderRadius: BorderRadius.circular(10)),
               child: TextFormField(
                 validator: (value) {
@@ -47,14 +47,15 @@ class _CreditPageState extends State<CreditPage> {
                 },
                 textAlign: TextAlign.center,
                 autofocus: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'Amount', border: InputBorder.none),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   if (value == '') {
                     amount = 0;
-                  } else
+                  } else {
                     amount = int.parse(value);
+                  }
                 },
               ),
             ),
@@ -62,7 +63,7 @@ class _CreditPageState extends State<CreditPage> {
               padding: const EdgeInsets.all(20),
               child: TextFormField(
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: 'Description', border: OutlineInputBorder()),
                 onChanged: (value) {
                   description = value;
@@ -70,17 +71,12 @@ class _CreditPageState extends State<CreditPage> {
               ),
             ),
             ElevatedButton(
-                style: ButtonStyle(),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Processing Data')),
-                    );
                     FocusManager.instance.primaryFocus?.unfocus();
-                    var firebaseUser = FirebaseAuth.instance.currentUser;
                     firestore
                         .collection("users")
-                        .doc(firebaseUser!.uid)
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
                         .collection('transactions')
                         .doc()
                         .set({
@@ -88,15 +84,14 @@ class _CreditPageState extends State<CreditPage> {
                       "description": description,
                       "date": dateandtime,
                     }).then((_) {
-                      Get.off(const MyHomePage());
+                      Get.off(() => const Home());
                     });
                   }
                 },
-                child: Text('Done')),
+                child: const Text('Done')),
           ],
         ),
       ),
-      bottomNavigationBar: BottomBar(0).BottomBarWidget(),
     );
   }
 }

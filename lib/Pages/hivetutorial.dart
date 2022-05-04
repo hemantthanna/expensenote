@@ -1,4 +1,3 @@
-import 'package:expensenote/constants/bottomnavigationbar.dart';
 import 'package:expensenote/main.dart';
 import 'package:expensenote/models/hivetransactionmodel.dart';
 import 'package:flutter/material.dart';
@@ -13,16 +12,46 @@ class HiveTutotial extends StatefulWidget {
 class _HiveTutotialState extends State<HiveTutotial> {
   @override
   Widget build(BuildContext context) {
-    HiveTransactions transaction0 = box.get(0);
-    HiveTransactions transaction1 = box.get(1);
-    String data0 = transaction0.amount.toString();
-    String data1 = transaction1.amount.toString();
     return Scaffold(
       appBar: AppBar(
-        title: Text(data0),
+        title: Text('hive transactions'),
       ),
-      body: Text(data1),
-      bottomNavigationBar: BottomBar(3).BottomBarWidget(),
+      // body: Text(box.get(0).amount.toString()),
+      body: ListView.builder(itemBuilder: (BuildContext context,int  index) => Center(
+                          child: Container(
+                            width: MediaQuery.of(context).size.width / 1.05,
+                            height: 80,
+                            color: Colors.grey[300],
+                            margin: EdgeInsets.all(5),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: Text(box.get(index).amount.toString(),
+                                      style: TextStyle(fontSize: 30)),
+                                ),
+                                Container(
+                                  width: 280,
+                                  height: 60,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                  alignment: Alignment.center,
+                                  padding: EdgeInsets.all(7),
+                                  child: Text(
+                                    box.get(index).amount.toString(),
+                                    maxLines: 3,
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),),
     );
   }
 }
