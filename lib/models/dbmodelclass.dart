@@ -3,29 +3,30 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class Transactionmodel {
   final int amount;
+  final String title;
   final String description;
   final DateTime date;
 
-  Transactionmodel(this.amount,
-      {required this.description, required this.date});
+  Transactionmodel({required this.amount,required this.title,required this.description, required this.date});
 
-  factory Transactionmodel.fromJson(Map<String, dynamic> json) =>
-      _TransactionsFromJson(json);
+  // factory Transactionmodel.fromJson(Map<String, dynamic> json) =>
+  //     TransactionsFromJson(json);
 
-  Map<String, dynamic> toJson() => _TransactionsToJson(this);
+  // Map<String, dynamic> toJson() => TransactionsToJson(this);
 }
 
 // Helper function to convert json data to transactionmodel object
-Transactionmodel _TransactionsFromJson(Map<String, dynamic> json) {
+Transactionmodel TransactionsFromJson(Map<String, dynamic> json) {
   return Transactionmodel(
-    json['amount'] as int,
+    amount: json['amount'] as int,
+    title: json['title'] as String,
     date: json['date'] as DateTime,
     description: json['description'] as String,
   );
 }
 // Helper function to convert transactionmodel object to json format
 
-Map<String, dynamic> _TransactionsToJson(Transactionmodel instance) =>
+Map<String, dynamic> TransactionsToJson(Transactionmodel instance) =>
     <String, dynamic>{
       'amount': instance.amount,
       'description': instance.description,
@@ -43,10 +44,7 @@ Future<int> getremainingamount() async {
 
   data.then((value) => value.docs.forEach((element) {
         remainingamount += int.parse((element['amount']).toString());
-        print(element['amount']);
       }));
-  
-
 
   return remainingamount;
 }

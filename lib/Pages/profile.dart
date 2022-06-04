@@ -47,8 +47,22 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
+          Container(
+            padding: EdgeInsets.only(top: 80),
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                'Expense',
+                style: TextStyle(fontSize: 37, color: Colors.black),
+              ),
+              Text(
+                'Note',
+                style: TextStyle(fontSize: 37, color: Colors.blue),
+              ),
+            ]),
+          ),
+          ///////////////////
           Container(
             width: double.infinity,
             height: 350.0,
@@ -57,12 +71,9 @@ class _ProfileState extends State<Profile> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10.0),
-                    child: Icon(
-                      Icons.account_circle,
-                      size: 100,
-                    ),
+                  Icon(
+                    Icons.account_circle,
+                    size: 100,
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -166,37 +177,35 @@ class _ProfileState extends State<Profile> {
             height: 20.0,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
-                          const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 10))),
-                  onPressed: () async {
-                    Get.snackbar('Resetting Database', 'almost done',
-                        snackPosition: SnackPosition.BOTTOM);
-                    var collections = FirebaseFirestore.instance
-                        .collection('users')
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
-                        .collection('transactions');
-                    var snapshot = await collections.get();
-                    for (var doc in snapshot.docs) {
-                      await doc.reference.delete();
-                      setState(() {
-                        moneyadded = 0;
-                        numoftransactions = 0;
-                        moneyspent = 0;
-                      });
-                    }
-                  },
-                  child: const Text(
-                    'Reset database',
-                    style: TextStyle(fontSize: 20),
-                  ),
-                ),
+            padding: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+            child: 
+                // ElevatedButton(
+                //   style: ButtonStyle(
+                //       padding: MaterialStateProperty.all(
+                //           const EdgeInsets.symmetric(
+                //               horizontal: 30, vertical: 10))),
+                //   onPressed: () async {
+                //     Get.snackbar('Resetting Database', 'almost done',
+                //         snackPosition: SnackPosition.BOTTOM);
+                //     var collections = FirebaseFirestore.instance
+                //         .collection('users')
+                //         .doc(FirebaseAuth.instance.currentUser!.uid)
+                //         .collection('transactions');
+                //     var snapshot = await collections.get();
+                //     for (var doc in snapshot.docs) {
+                //       await doc.reference.delete();
+                //       setState(() {
+                //         moneyadded = 0;
+                //         numoftransactions = 0;
+                //         moneyspent = 0;
+                //       });
+                //     }
+                //   },
+                //   child: const Text(
+                //     'Reset database',
+                //     style: TextStyle(fontSize: 20),
+                //   ),
+                // ),
                 ElevatedButton(
                   style: ButtonStyle(
                       padding: MaterialStateProperty.all(
@@ -211,11 +220,10 @@ class _ProfileState extends State<Profile> {
                     style: TextStyle(fontSize: 20),
                   ),
                 ),
-              ],
+              
             ),
+        ]
           )
-        ],
-      ),
     );
   }
 }

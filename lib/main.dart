@@ -1,5 +1,4 @@
 import 'package:expensenote/Pages/auth.dart';
-import 'package:expensenote/models/hivetransactionmodel.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,6 @@ import 'Pages/myhomepage.dart';
 late Box box;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive.registerAdapter(HiveTransactionsAdapter());
   await Firebase.initializeApp();
 
   runApp(const MyApp());
@@ -37,9 +34,6 @@ class Wrapper extends StatelessWidget {
       if (user == null) {
         Get.off(const Auth());
       } else {
-        box = await Hive.openBox(
-            FirebaseAuth.instance.currentUser!.uid.toString());
-
         Get.off(const Home());
       }
     });
