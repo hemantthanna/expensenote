@@ -7,12 +7,11 @@ class Transactionmodel {
   final String description;
   final DateTime date;
 
-  Transactionmodel({required this.amount,required this.title,required this.description, required this.date});
-
-  // factory Transactionmodel.fromJson(Map<String, dynamic> json) =>
-  //     TransactionsFromJson(json);
-
-  // Map<String, dynamic> toJson() => TransactionsToJson(this);
+  Transactionmodel(
+      {required this.amount,
+      required this.title,
+      required this.description,
+      required this.date});
 }
 
 // Helper function to convert json data to transactionmodel object
@@ -24,8 +23,8 @@ Transactionmodel TransactionsFromJson(Map<String, dynamic> json) {
     description: json['description'] as String,
   );
 }
-// Helper function to convert transactionmodel object to json format
 
+// Helper function to convert transactionmodel object to json format
 Map<String, dynamic> TransactionsToJson(Transactionmodel instance) =>
     <String, dynamic>{
       'amount': instance.amount,
@@ -34,6 +33,7 @@ Map<String, dynamic> TransactionsToJson(Transactionmodel instance) =>
     };
 
 Future<int> getremainingamount() async {
+  print('getremaning amount function running now');
   int remainingamount = 0;
 
   final data = FirebaseFirestore.instance
